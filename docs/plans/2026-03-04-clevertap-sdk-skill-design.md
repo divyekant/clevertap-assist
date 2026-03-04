@@ -5,12 +5,13 @@
 
 ## Overview
 
-A multi-platform, multi-tool skill that helps developers integrate and debug CleverTap SDKs. Works across Claude Code, Codex, and Cursor via thin adapter files sharing a single source of truth.
+A multi-platform, multi-tool skill that helps developers integrate, debug, and audit CleverTap SDKs. Works across Claude Code, Codex, and Cursor via thin adapter files sharing a single source of truth.
 
 ## Goals
 
 - Help developers add CleverTap SDK to any project (Web, iOS, Android, React Native, Flutter, server-side)
 - Help developers diagnose and fix CleverTap SDK issues
+- Help developers audit how CleverTap is used across their codebase
 - Work in Claude Code, Codex, and Cursor from the same knowledge base
 - Stay current as CleverTap's SDK ecosystem evolves
 - Open source and extensible to third-party integrations later
@@ -30,14 +31,16 @@ clevertap-sdk/
 │   │       ├── node.md
 │   │       ├── python.md
 │   │       └── java.md
-│   └── debugging/
-│       ├── common.md              # Cross-platform gotchas
-│       ├── web.md                 # Web-specific diagnosis
-│       ├── ios.md
-│       ├── android.md
-│       ├── react-native.md
-│       ├── flutter.md
-│       └── server.md
+│   ├── debugging/
+│   │   ├── common.md              # Cross-platform gotchas
+│   │   ├── web.md                 # Web-specific diagnosis
+│   │   ├── ios.md
+│   │   ├── android.md
+│   │   ├── react-native.md
+│   │   ├── flutter.md
+│   │   └── server.md
+│   └── audit/
+│       └── features.md            # All CleverTap feature areas and their SDK method signatures
 ├── adapters/
 │   ├── claude-code/
 │   │   └── SKILL.md               # CC skill with trigger phrases and tool usage
@@ -74,6 +77,56 @@ Trigger: developer reports CleverTap SDK issue.
 2. **Quick checklist** — load `core/debugging/common.md` + platform-specific debug file, pattern-match
 3. **Active diagnosis** — if checklist doesn't resolve, scan codebase for SDK usage and identify the issue
 4. **Fix + verify** — apply fix and confirm resolution
+
+### Audit Mode
+
+Trigger: developer asks how CleverTap is used across their app, or wants to review SDK coverage.
+
+1. **Detect platform** — same scanning logic
+2. **Load feature map** — read `core/audit/features.md` for the full list of SDK methods per feature area
+3. **Scan codebase** — search for all CleverTap SDK method calls, group by feature area and code flow
+4. **Generate report** — produce a usage map showing what's integrated, what's missing, and any issues
+
+#### Feature Areas Covered
+
+| Feature Area | What It Looks For |
+|---|---|
+| **Identity** | `onUserLogin`, `profilePush`, profile properties, identity call ordering |
+| **Events** | `pushEvent`, charged events, custom event naming conventions |
+| **Push Notifications** | FCM/APNs setup, token registration, notification channels, handlers |
+| **App Inbox** | Inbox initialization, message display, callbacks, UI customization |
+| **In-App Notifications** | Display rules, callbacks, dismiss handlers |
+| **Web Push** | Service worker registration, prompt setup, notification permissions |
+| **Product Experiences** | Feature flags, A/B test variants, product config |
+| **Geofencing** | Location permissions, geofence triggers |
+| **Web Native Display** | Banner/popup campaigns, display callbacks |
+
+#### Example Audit Output
+
+```
+CleverTap SDK Usage Map
+━━━━━━━━━━━━━━━━━━━━━━
+Identity:
+  - onUserLogin: 2 flows (email login, Google SSO)
+  - profilePush: 3 locations
+  - ⚠ Missing onUserLogin in Apple SSO flow
+
+Push Notifications:
+  - FCM token registered in AppDelegate
+  - ⚠ No notification channel setup for Android 8+
+
+App Inbox: Not integrated
+
+Events:
+  - 14 custom events across 8 files
+  - 2 charged events in checkout flow
+  - ✓ All events tracked after init
+
+In-App Notifications: Not integrated
+Web Push: Not applicable (mobile app)
+Product Experiences: Not integrated
+Geofencing: Not integrated
+```
 
 ## Knowledge Layer
 
@@ -139,7 +192,7 @@ When reference files don't cover a case (new SDK feature, unfamiliar framework),
 
 ## Adapter Design
 
-All adapters describe the same workflow (detect → load → generate/diagnose → verify). Only format and tool-specific mechanics differ.
+All adapters describe the same three modes (integrate, debug, audit) with shared platform detection. Only format and tool-specific mechanics differ.
 
 - **Claude Code** (`SKILL.md`): skill frontmatter, trigger phrases, Read/Bash/Glob tool usage
 - **Codex** (`AGENTS.md`): agent config format, context file references
