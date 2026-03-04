@@ -1,8 +1,8 @@
-# CleverTap SDK Skill — Implementation Plan
+# CleverTap Assist — Implementation Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Build a multi-platform, multi-tool skill that helps developers integrate, debug, and audit CleverTap SDKs.
+**Goal:** Build CleverTap Assist — a multi-platform, multi-tool skill that helps developers integrate, debug, and audit CleverTap SDKs.
 
 **Architecture:** Monorepo with `core/` (tool-agnostic markdown knowledge) + `adapters/` (thin wrappers for Claude Code, Codex, Cursor). Three modes: integration, debugging, audit.
 

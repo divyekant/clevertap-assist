@@ -1,4 +1,4 @@
-# CleverTap SDK Skill — Design Document
+# CleverTap Assist — Design Document
 
 **Date:** 2026-03-04
 **Status:** Approved
@@ -19,7 +19,7 @@ A multi-platform, multi-tool skill that helps developers integrate, debug, and a
 ## Architecture: Monorepo with Adapter Layer
 
 ```
-clevertap-sdk/
+clevertap-assist/
 ├── core/                          # Tool-agnostic knowledge (pure markdown)
 │   ├── integration/
 │   │   ├── web.md                 # Web SDK (vanilla JS, React, Next.js, Vue, Angular)
