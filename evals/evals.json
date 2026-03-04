@@ -1,0 +1,111 @@
+{
+  "skill_name": "clevertap-assist",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I just started a new React app with create-react-app and I need to add CleverTap analytics to track user signups and page views. My account ID is TEST-123-456 and I'm on the US region.",
+      "expected_output": "Should detect Web platform (React variant), load core/integration/web.md, generate npm install + React useEffect init pattern + event tracking code for signups and page views. Should use the provided account ID and us1 region.",
+      "assertions": [
+        {"text": "Detects React as the web framework variant", "type": "boolean"},
+        {"text": "References or loads core/integration/web.md", "type": "boolean"},
+        {"text": "Includes npm install clevertap-web-sdk command", "type": "boolean"},
+        {"text": "Uses useEffect for initialization (React pattern)", "type": "boolean"},
+        {"text": "Includes onUserLogin for signup tracking", "type": "boolean"},
+        {"text": "Includes event.push for page view tracking", "type": "boolean"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I have a Swift iOS app and I'm getting no events in my CleverTap dashboard. I added the SDK via CocoaPods last week and put the init code in viewDidLoad of my main view controller. Debug logs show nothing.",
+      "expected_output": "Should detect iOS platform, enter debug mode, load core/debugging/common.md first (init ordering issue - viewDidLoad is wrong, should be AppDelegate), then core/debugging/ios.md. Should identify that autoIntegrate must be in didFinishLaunchingWithOptions, not viewDidLoad.",
+      "assertions": [
+        {"text": "Enters debug mode (not integration or audit)", "type": "boolean"},
+        {"text": "Loads common debugging reference first", "type": "boolean"},
+        {"text": "Identifies init placement as the issue (viewDidLoad vs AppDelegate)", "type": "boolean"},
+        {"text": "Recommends moving init to didFinishLaunchingWithOptions", "type": "boolean"},
+        {"text": "Suggests enabling debug logging to verify fix", "type": "boolean"}
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "We have a large Android app with multiple login flows (email, Google SSO, Facebook). I want to understand where CleverTap is being used across our codebase - which flows call onUserLogin, where we track events, and whether push is set up correctly.",
+      "expected_output": "Should detect Android platform, enter audit mode, load core/audit/features.md, scan for all CleverTap method calls using the regex patterns, group by feature area (Identity, Events, Push, etc.), and generate the audit report template showing usage across the login flows.",
+      "assertions": [
+        {"text": "Enters audit mode (not integration or debug)", "type": "boolean"},
+        {"text": "Loads core/audit/features.md", "type": "boolean"},
+        {"text": "Searches for onUserLogin calls across the codebase", "type": "boolean"},
+        {"text": "Searches for pushEvent calls", "type": "boolean"},
+        {"text": "Searches for push notification setup (pushFcmRegistrationId)", "type": "boolean"},
+        {"text": "Groups findings by feature area in the report", "type": "boolean"},
+        {"text": "Flags any flows missing onUserLogin", "type": "boolean"}
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Add CleverTap to my Flutter app. I need event tracking and push notifications on both Android and iOS.",
+      "expected_output": "Should detect Flutter platform, load core/integration/flutter.md, ask for credentials, generate pubspec.yaml dep + Android manifest + iOS Info.plist + Dart init code + push setup for both platforms.",
+      "assertions": [
+        {"text": "Detects Flutter platform", "type": "boolean"},
+        {"text": "Asks for Account ID, Token, and Region", "type": "boolean"},
+        {"text": "Includes pubspec.yaml dependency", "type": "boolean"},
+        {"text": "Includes Android native setup (manifest + Application class)", "type": "boolean"},
+        {"text": "Includes iOS native setup (Info.plist + AppDelegate)", "type": "boolean"},
+        {"text": "Includes push notification setup for both platforms", "type": "boolean"},
+        {"text": "Warns about ActivityLifecycleCallback ordering", "type": "boolean"}
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "I'm getting 429 errors when uploading events to CleverTap from my Node.js backend. I'm sending about 500 events per second using individual API calls.",
+      "expected_output": "Should detect server/Node platform, enter debug mode, load core/debugging/server.md, identify rate limiting as the issue (15 concurrent requests), recommend batching events (up to 1000 per request) instead of individual calls.",
+      "assertions": [
+        {"text": "Enters debug mode", "type": "boolean"},
+        {"text": "Identifies 429 as rate limiting", "type": "boolean"},
+        {"text": "Explains the 15 concurrent request limit", "type": "boolean"},
+        {"text": "Recommends batching events", "type": "boolean"},
+        {"text": "Mentions the 1000 record per batch limit", "type": "boolean"}
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "I'm building a React Native app and my push notifications work on iOS but not on Android. The app is targeting Android 13+.",
+      "expected_output": "Should detect React Native, enter debug mode, check Android-specific push issues: notification channels (required for Android 8+), POST_NOTIFICATIONS runtime permission (required for Android 13+), FCM token registration.",
+      "assertions": [
+        {"text": "Detects React Native platform", "type": "boolean"},
+        {"text": "Enters debug mode", "type": "boolean"},
+        {"text": "Checks notification channel setup for Android 8+", "type": "boolean"},
+        {"text": "Identifies POST_NOTIFICATIONS permission requirement for Android 13+", "type": "boolean"},
+        {"text": "Checks FCM token registration", "type": "boolean"}
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Integrate CleverTap into my Rust microservice for server-side event tracking.",
+      "expected_output": "Should recognize Rust is not a supported platform with a reference file, gracefully handle by asking the developer for more context, and fallback to fetching from developer.clevertap.com or suggest using the REST API directly (similar to server SDK patterns).",
+      "assertions": [
+        {"text": "Recognizes Rust is not directly covered", "type": "boolean"},
+        {"text": "Does not hallucinate a Rust SDK", "type": "boolean"},
+        {"text": "Suggests REST API approach or fetches from CleverTap docs", "type": "boolean"},
+        {"text": "Provides useful guidance despite missing reference file", "type": "boolean"}
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Our app has both a Podfile and a build.gradle. I want to add CleverTap to it.",
+      "expected_output": "Should detect ambiguity (could be iOS, Android, or React Native/Flutter monorepo), ask the developer which platform they want to target rather than guessing.",
+      "assertions": [
+        {"text": "Detects ambiguous platform signals", "type": "boolean"},
+        {"text": "Asks the developer which platform to target", "type": "boolean"},
+        {"text": "Does not assume a platform without asking", "type": "boolean"}
+      ],
+      "files": []
+    }
+  ]
+}
