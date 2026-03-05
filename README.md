@@ -192,6 +192,12 @@ Create a new directory under `adapters/<tool-name>/` with the tool's configurati
 
 ---
 
+## Found a Case That Doesn't Work?
+
+[Open an eval case issue](../../issues/new?template=eval-case.yml) — describe what you asked, what platform you're on, and what went wrong. We'll add it to the test suite so future versions handle it correctly.
+
+---
+
 ## License
 
 MIT

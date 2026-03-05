@@ -1,0 +1,99 @@
+name: New Eval Case
+description: Submit a real-world scenario to add to the test suite
+title: "[Eval] "
+labels: ["eval-case"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing! Describe a real scenario you tried (or want to try) so we can add it to `evals/evals.json`.
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      options:
+        - Integration
+        - Debug
+        - Audit
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Web (Vanilla JS)
+        - Web (React)
+        - Web (Next.js)
+        - Web (Vue)
+        - Web (Angular)
+        - iOS (Swift)
+        - iOS (Objective-C)
+        - Android (Kotlin)
+        - Android (Java)
+        - React Native
+        - Flutter
+        - Server (Node.js)
+        - Server (Python)
+        - Server (Java)
+        - Other / Unsupported
+    validations:
+      required: true
+
+  - type: textarea
+    id: prompt
+    attributes:
+      label: What you asked (the prompt)
+      description: Paste the exact prompt you gave the LLM, or write one that represents the scenario.
+      placeholder: "I have a Next.js 14 app using the App Router and I need to add CleverTap event tracking for page views across server and client components."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should happen
+      description: Describe the ideal response — what the assistant should do, check, or produce.
+      placeholder: |
+        - Detect Next.js as the platform
+        - Explain that CleverTap Web SDK is client-only (no SSR)
+        - Use a client component with useEffect for init
+        - Track page views via usePathname
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened (if you tested it)
+      description: Optional — paste the response you got, or describe what went wrong.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      description: Did the assistant handle this correctly?
+      options:
+        - Worked correctly
+        - Partially correct (some gaps)
+        - Wrong answer
+        - Didn't trigger the skill at all
+        - Haven't tested yet
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tool
+    attributes:
+      label: Which AI tool?
+      options:
+        - Claude Code
+        - Codex
+        - Cursor
+        - Other LLM (pasted quickstart)
+    validations:
+      required: true
