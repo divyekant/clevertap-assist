@@ -152,6 +152,12 @@ This separation means updating SDK knowledge (e.g., a new API method or a new pl
 
 ---
 
+## Docs
+
+- **[LLM Quickstart](docs/llm-quickstart.md)** — Copy-paste this into any LLM (Claude, GPT, Codex, Gemini) to give it full CleverTap Assist context. No tool-specific setup required.
+
+---
+
 ## Contributing
 
 ### Adding a New Platform
