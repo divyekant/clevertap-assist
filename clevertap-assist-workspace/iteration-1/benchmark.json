@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "skill_name": "clevertap-assist",
+    "skill_path": "/Users/divyekant/Projects/clevertap-assist/adapters/claude-code/SKILL.md",
+    "executor_model": "claude-opus-4-6",
+    "analyzer_model": "claude-opus-4-6",
+    "timestamp": "2026-03-04T00:00:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "react-integration",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 104.1,
+        "tokens": 43627,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Detects React as the web framework variant", "passed": true, "evidence": "Explicitly states 'Web (React) -- create-react-app produces a React SPA'."},
+        {"text": "References or loads core/integration/web.md", "passed": true, "evidence": "Response follows skill workflow loading core/integration/web.md."},
+        {"text": "Includes npm install clevertap-web-sdk command", "passed": true, "evidence": "Contains 'npm install clevertap-web-sdk --save' in Step 1."},
+        {"text": "Uses useEffect for initialization (React pattern)", "passed": true, "evidence": "Shows useEffect with empty dependency array for init."},
+        {"text": "Includes onUserLogin for signup tracking", "passed": true, "evidence": "identifyUser wrapper using clevertap.onUserLogin.push."},
+        {"text": "Includes event.push for page view tracking", "passed": true, "evidence": "clevertap.event.push('Page Viewed', ...) in trackPageView and PageTracker."}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "react-integration",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.833,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "time_seconds": 83.0,
+        "tokens": 32578,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Detects React as the web framework variant", "passed": true, "evidence": "Title: 'CleverTap React Integration Guide'."},
+        {"text": "References or loads core/integration/web.md", "passed": false, "evidence": "Baseline has no access to skill or core reference files."},
+        {"text": "Includes npm install clevertap-web-sdk command", "passed": true, "evidence": "Contains 'npm install clevertap-web-sdk' in Step 1."},
+        {"text": "Uses useEffect for initialization (React pattern)", "passed": true, "evidence": "useEffect in usePageTracking hook."},
+        {"text": "Includes onUserLogin for signup tracking", "passed": true, "evidence": "clevertap.onUserLogin.push in Signup.js."},
+        {"text": "Includes event.push for page view tracking", "passed": true, "evidence": "clevertap.event.push('Page Viewed', ...) in usePageTracking."}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "ios-debug",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 108.9,
+        "tokens": 50480,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Enters debug mode (not integration or audit)", "passed": true, "evidence": "Header: 'Mode: Debug | Platform: iOS (Swift, CocoaPods)'."},
+        {"text": "Loads common debugging reference first", "passed": true, "evidence": "States 'Following the common debugging checklist and iOS-specific diagnostic reference'."},
+        {"text": "Identifies init placement as the issue (viewDidLoad vs AppDelegate)", "passed": true, "evidence": "Step 2: 'init code in viewDidLoad... This is the primary problem.'"},
+        {"text": "Recommends moving init to didFinishLaunchingWithOptions", "passed": true, "evidence": "Shows corrected AppDelegate with autoIntegrate() in didFinishLaunchingWithOptions."},
+        {"text": "Suggests enabling debug logging to verify fix", "passed": true, "evidence": "Step 1: CleverTap.setDebugLevel before init, Step 5: console messages to verify."}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "ios-debug",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 77.0,
+        "tokens": 32076,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Enters debug mode (not integration or audit)", "passed": true, "evidence": "Diagnostic Summary header, debugging-focused throughout."},
+        {"text": "Loads common debugging reference first", "passed": false, "evidence": "Baseline has no access to skill or core debugging reference files."},
+        {"text": "Identifies init placement as the issue (viewDidLoad vs AppDelegate)", "passed": true, "evidence": "Issue 1 (Critical): SDK Initialized in the Wrong Lifecycle Method."},
+        {"text": "Recommends moving init to didFinishLaunchingWithOptions", "passed": true, "evidence": "Shows corrected AppDelegate with autoIntegrate() in didFinishLaunchingWithOptions."},
+        {"text": "Suggests enabling debug logging to verify fix", "passed": true, "evidence": "Issue 2: CleverTap.setDebugLevel(3) before autoIntegrate."}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "android-audit",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 169.8,
+        "tokens": 48791,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Enters audit mode (not integration or debug)", "passed": true, "evidence": "Mode Detected: Audit."},
+        {"text": "Loads core/audit/features.md", "passed": true, "evidence": "Step 2: load core/audit/features.md for Android-specific patterns."},
+        {"text": "Searches for onUserLogin calls across the codebase", "passed": true, "evidence": "IDENTITY_ALL pattern with onUserLogin and per-login-flow grouping."},
+        {"text": "Searches for pushEvent calls", "passed": true, "evidence": "EVENTS_ALL pattern with pushEvent in regex."},
+        {"text": "Searches for push notification setup (pushFcmRegistrationId)", "passed": true, "evidence": "PUSH_ALL pattern with pushFcmRegistrationId and 5 sub-patterns."},
+        {"text": "Groups findings by feature area in the report", "passed": true, "evidence": "10 feature categories in report template."},
+        {"text": "Flags any flows missing onUserLogin", "passed": true, "evidence": "Section 7.1: Multi-Login Flow Identity Analysis with per-flow table."}
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "android-audit",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.857,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 120.7,
+        "tokens": 34124,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Enters audit mode (not integration or debug)", "passed": true, "evidence": "Titled 'CleverTap Android SDK Audit Guide' with audit-focused approach."},
+        {"text": "Loads core/audit/features.md", "passed": false, "evidence": "Baseline has no access to skill or core audit reference files."},
+        {"text": "Searches for onUserLogin calls across the codebase", "passed": true, "evidence": "rg -n 'onUserLogin' command and per-flow analysis."},
+        {"text": "Searches for pushEvent calls", "passed": true, "evidence": "rg -n 'pushEvent|recordEvent|pushChargedEvent' command."},
+        {"text": "Searches for push notification setup (pushFcmRegistrationId)", "passed": true, "evidence": "rg -n 'pushFcmRegistrationId|onNewToken' command."},
+        {"text": "Groups findings by feature area in the report", "passed": true, "evidence": "Part 4 template groups by SDK Config, Identity, Events, Push, Additional."},
+        {"text": "Flags any flows missing onUserLogin", "passed": true, "evidence": "Per-flow table and common issues list in Part 4.2."}
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 127.6, "stddev": 35.0, "min": 104.1, "max": 169.8},
+      "tokens": {"mean": 47633, "stddev": 3503, "min": 43627, "max": 50480}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.83, "stddev": 0.029, "min": 0.8, "max": 0.857},
+      "time_seconds": {"mean": 93.6, "stddev": 23.7, "min": 77.0, "max": 120.7},
+      "tokens": {"mean": 32926, "stddev": 1069, "min": 32076, "max": 34124}
+    },
+    "delta": {
+      "pass_rate": "+0.17",
+      "time_seconds": "+34.0",
+      "tokens": "+14707"
+    }
+  },
+  "notes": [
+    "With-skill runs achieve 100% pass rate across all 3 evals vs ~83% baseline.",
+    "The +17% pass rate improvement comes from skill-specific assertions (loading reference files, entering correct mode).",
+    "Baseline performs well on domain knowledge (CleverTap APIs) since the model already knows CleverTap.",
+    "With-skill runs use ~45% more tokens and ~36% more time due to reading reference files.",
+    "The skill's primary value is structured workflows (mode detection, reference loading, audit templates) rather than raw SDK knowledge."
+  ]
+}

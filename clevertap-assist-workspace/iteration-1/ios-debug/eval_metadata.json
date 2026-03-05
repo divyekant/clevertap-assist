@@ -1,0 +1,12 @@
+{
+  "eval_id": 2,
+  "eval_name": "ios-debug",
+  "prompt": "I have a Swift iOS app and I'm getting no events in my CleverTap dashboard. I added the SDK via CocoaPods last week and put the init code in viewDidLoad of my main view controller. Debug logs show nothing.",
+  "assertions": [
+    {"text": "Enters debug mode (not integration or audit)", "type": "boolean"},
+    {"text": "Loads common debugging reference first", "type": "boolean"},
+    {"text": "Identifies init placement as the issue (viewDidLoad vs AppDelegate)", "type": "boolean"},
+    {"text": "Recommends moving init to didFinishLaunchingWithOptions", "type": "boolean"},
+    {"text": "Suggests enabling debug logging to verify fix", "type": "boolean"}
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "eval_id": 2,
+  "eval_name": "ios-debug",
+  "variant": "without_skill",
+  "assertions": [
+    {
+      "text": "Enters debug mode (not integration or audit)",
+      "pass": true,
+      "evidence": "Entire response is diagnostic/debugging focused. Header says 'Diagnostic Summary' with symptoms analysis."
+    },
+    {
+      "text": "Loads common debugging reference first",
+      "pass": false,
+      "evidence": "Baseline run has no access to the skill or core debugging reference files."
+    },
+    {
+      "text": "Identifies init placement as the issue (viewDidLoad vs AppDelegate)",
+      "pass": true,
+      "evidence": "Issue 1 (Critical): 'SDK Initialized in the Wrong Lifecycle Method' - clearly explains viewDidLoad is wrong."
+    },
+    {
+      "text": "Recommends moving init to didFinishLaunchingWithOptions",
+      "pass": true,
+      "evidence": "Shows corrected AppDelegate code with autoIntegrate() in didFinishLaunchingWithOptions."
+    },
+    {
+      "text": "Suggests enabling debug logging to verify fix",
+      "pass": true,
+      "evidence": "Issue 2 recommends 'CleverTap.setDebugLevel(3)' before autoIntegrate, with detailed debug level explanations."
+    }
+  ],
+  "score": 4,
+  "total": 5,
+  "pass_rate": 0.8
+}

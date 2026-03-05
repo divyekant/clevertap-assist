@@ -1,0 +1,13 @@
+{
+  "eval_id": 1,
+  "eval_name": "react-integration",
+  "prompt": "I just started a new React app with create-react-app and I need to add CleverTap analytics to track user signups and page views. My account ID is TEST-123-456 and I'm on the US region.",
+  "assertions": [
+    {"text": "Detects React as the web framework variant", "type": "boolean"},
+    {"text": "References or loads core/integration/web.md", "type": "boolean"},
+    {"text": "Includes npm install clevertap-web-sdk command", "type": "boolean"},
+    {"text": "Uses useEffect for initialization (React pattern)", "type": "boolean"},
+    {"text": "Includes onUserLogin for signup tracking", "type": "boolean"},
+    {"text": "Includes event.push for page view tracking", "type": "boolean"}
+  ]
+}

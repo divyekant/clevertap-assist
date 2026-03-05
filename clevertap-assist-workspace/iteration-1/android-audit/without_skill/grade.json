@@ -1,0 +1,45 @@
+{
+  "eval_id": 3,
+  "eval_name": "android-audit",
+  "variant": "without_skill",
+  "assertions": [
+    {
+      "text": "Enters audit mode (not integration or debug)",
+      "pass": true,
+      "evidence": "Titled 'CleverTap Android SDK Audit Guide' with audit-focused approach (static search, flow tracing, cross-referencing)."
+    },
+    {
+      "text": "Loads core/audit/features.md",
+      "pass": false,
+      "evidence": "Baseline run has no access to the skill or core audit reference files."
+    },
+    {
+      "text": "Searches for onUserLogin calls across the codebase",
+      "pass": true,
+      "evidence": "Part 3 includes 'rg -n \"onUserLogin\" --glob \"*.java\" --glob \"*.kt\"' with per-flow analysis in Part 5."
+    },
+    {
+      "text": "Searches for pushEvent calls",
+      "pass": true,
+      "evidence": "Part 3 includes 'rg -n \"pushEvent|recordEvent|pushChargedEvent|recordChargedEvent\"'."
+    },
+    {
+      "text": "Searches for push notification setup (pushFcmRegistrationId)",
+      "pass": true,
+      "evidence": "Part 3 includes 'rg -n \"pushFcmRegistrationId|onNewToken|pushHuaweiRegistrationId\"'."
+    },
+    {
+      "text": "Groups findings by feature area in the report",
+      "pass": true,
+      "evidence": "Part 4 report template groups into: SDK Configuration, Identity Management, Event Tracking, Push Notification, Additional Features, Risk Assessment."
+    },
+    {
+      "text": "Flags any flows missing onUserLogin",
+      "pass": true,
+      "evidence": "Part 4.2 Identity Management table has per-flow rows (Email, Google SSO, Facebook) with 'Issues' column. Common Issues list includes 'onUserLogin called on app launch instead of only on login' and 'Missing identity keys'."
+    }
+  ],
+  "score": 6,
+  "total": 7,
+  "pass_rate": 0.857
+}

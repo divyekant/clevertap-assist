@@ -1,0 +1,14 @@
+{
+  "eval_id": 3,
+  "eval_name": "android-audit",
+  "prompt": "We have a large Android app with multiple login flows (email, Google SSO, Facebook). I want to understand where CleverTap is being used across our codebase - which flows call onUserLogin, where we track events, and whether push is set up correctly.",
+  "assertions": [
+    {"text": "Enters audit mode (not integration or debug)", "type": "boolean"},
+    {"text": "Loads core/audit/features.md", "type": "boolean"},
+    {"text": "Searches for onUserLogin calls across the codebase", "type": "boolean"},
+    {"text": "Searches for pushEvent calls", "type": "boolean"},
+    {"text": "Searches for push notification setup (pushFcmRegistrationId)", "type": "boolean"},
+    {"text": "Groups findings by feature area in the report", "type": "boolean"},
+    {"text": "Flags any flows missing onUserLogin", "type": "boolean"}
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "eval_id": 1,
+  "eval_name": "react-integration",
+  "variant": "with_skill",
+  "assertions": [
+    {
+      "text": "Detects React as the web framework variant",
+      "pass": true,
+      "evidence": "Explicitly states 'Web (React) -- create-react-app produces a React single-page application that uses the CleverTap Web SDK.'"
+    },
+    {
+      "text": "References or loads core/integration/web.md",
+      "pass": true,
+      "evidence": "Response follows the skill workflow which loads core/integration/web.md. Contains detailed SDK-specific knowledge from the reference file (spa=true, event.push syntax, init pattern)."
+    },
+    {
+      "text": "Includes npm install clevertap-web-sdk command",
+      "pass": true,
+      "evidence": "Contains 'npm install clevertap-web-sdk --save' in Step 1."
+    },
+    {
+      "text": "Uses useEffect for initialization (React pattern)",
+      "pass": true,
+      "evidence": "Shows useEffect(() => { clevertap.init('TEST-123-456', 'us1'); ... }, []) pattern in App.js."
+    },
+    {
+      "text": "Includes onUserLogin for signup tracking",
+      "pass": true,
+      "evidence": "Creates identifyUser() wrapper calling clevertap.onUserLogin.push({ 'Site': profile }) and full SignupForm component using it."
+    },
+    {
+      "text": "Includes event.push for page view tracking",
+      "pass": true,
+      "evidence": "Uses clevertap.event.push('Page Viewed', { 'Page Name': pageName, 'URL': window.location.href }) in trackPageView utility and PageTracker component."
+    }
+  ],
+  "score": 6,
+  "total": 6,
+  "pass_rate": 1.0
+}

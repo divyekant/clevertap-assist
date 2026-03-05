@@ -1,0 +1,35 @@
+{
+  "eval_id": 2,
+  "eval_name": "ios-debug",
+  "variant": "with_skill",
+  "assertions": [
+    {
+      "text": "Enters debug mode (not integration or audit)",
+      "pass": true,
+      "evidence": "Explicitly declares 'Mode: Debug | Platform: iOS (Swift, CocoaPods)' in the header."
+    },
+    {
+      "text": "Loads common debugging reference first",
+      "pass": true,
+      "evidence": "States 'Following the common debugging checklist and iOS-specific diagnostic reference step by step.'"
+    },
+    {
+      "text": "Identifies init placement as the issue (viewDidLoad vs AppDelegate)",
+      "pass": true,
+      "evidence": "Step 2 clearly identifies: 'The developer stated they put the init code in viewDidLoad of the main view controller. This is the primary problem.'"
+    },
+    {
+      "text": "Recommends moving init to didFinishLaunchingWithOptions",
+      "pass": true,
+      "evidence": "Shows corrected code in AppDelegate with application(_:didFinishLaunchingWithOptions:) containing CleverTap.autoIntegrate()."
+    },
+    {
+      "text": "Suggests enabling debug logging to verify fix",
+      "pass": true,
+      "evidence": "Step 1 recommends 'CleverTap.setDebugLevel(CleverTapLogLevel.debug.rawValue)' before init, and Step 5 lists console messages to look for."
+    }
+  ],
+  "score": 5,
+  "total": 5,
+  "pass_rate": 1.0
+}

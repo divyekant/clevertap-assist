@@ -1,0 +1,40 @@
+{
+  "eval_id": 1,
+  "eval_name": "react-integration",
+  "variant": "without_skill",
+  "assertions": [
+    {
+      "text": "Detects React as the web framework variant",
+      "pass": true,
+      "evidence": "Title says 'CleverTap React Integration Guide', React-specific patterns throughout."
+    },
+    {
+      "text": "References or loads core/integration/web.md",
+      "pass": false,
+      "evidence": "Baseline run has no access to the skill or core reference files."
+    },
+    {
+      "text": "Includes npm install clevertap-web-sdk command",
+      "pass": true,
+      "evidence": "Contains 'npm install clevertap-web-sdk' in Step 1."
+    },
+    {
+      "text": "Uses useEffect for initialization (React pattern)",
+      "pass": true,
+      "evidence": "Uses useEffect in usePageTracking custom hook for route-change tracking."
+    },
+    {
+      "text": "Includes onUserLogin for signup tracking",
+      "pass": true,
+      "evidence": "Shows clevertap.onUserLogin.push({ Site: { ... } }) in Signup.js handleSignup."
+    },
+    {
+      "text": "Includes event.push for page view tracking",
+      "pass": true,
+      "evidence": "Uses clevertap.event.push('Page Viewed', {...}) in usePageTracking hook."
+    }
+  ],
+  "score": 5,
+  "total": 6,
+  "pass_rate": 0.833
+}

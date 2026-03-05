@@ -1,6 +1,6 @@
 ---
 name: clevertap-assist
-description: "Use when integrating CleverTap SDK into a project, debugging CleverTap SDK issues, or auditing CleverTap SDK usage across a codebase. Triggers on: 'clevertap', 'add clevertap', 'integrate clevertap', 'clevertap not working', 'clevertap debug', 'clevertap events not showing', 'clevertap audit', 'SDK events not showing', 'push notifications not working clevertap', 'clevertap profile', 'onUserLogin'."
+description: "Use when a developer needs help with CleverTap — adding the SDK to any project (Web, iOS, Android, React Native, Flutter, server-side), troubleshooting CleverTap issues (events not showing, push not working, SDK errors, dashboard empty), or auditing how CleverTap is used across a codebase. Covers all CleverTap SDK operations: integration, onUserLogin, event tracking, push notifications, in-app messages, and app inbox. DO NOT use for general analytics questions unrelated to CleverTap."
 ---
 
 # CleverTap SDK Assistant
